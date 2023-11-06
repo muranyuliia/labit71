@@ -1,7 +1,9 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
-#include <Windows.h>
+#include <vector>
+#include <algorithm>
+
 using namespace std;
 
 const int numRows = 7;
@@ -38,10 +40,47 @@ void replaceOddNonNegative(int matrix[numRows][numCols]) {
     }
 }
 
+// Сортує матрицю згідно зазначених ключів впорядкування
+void sortMatrix(int matrix[numRows][numCols]) {
+    vector<pair<vector<int>, int>> rowsWithIndices;
+    for (int i = 0; i < numRows; i++) {
+        vector<int> row;
+        for (int j = 0; j < numCols; j++) {
+            row.push_back(matrix[i][j]);
+        }
+        rowsWithIndices.push_back({ row, i });
+    }
+
+    // Сортування рядків за першим і другим стовпчиками
+    sort(rowsWithIndices.begin(), rowsWithIndices.end(), [](const pair<vector<int>, int>& a, const pair<vector<int>, int>& b) {
+        if (a.first[0] != b.first[0]) {
+            return a.first[0] < b.first[0];
+        }
+        else if (a.first[1] != b.first[1]) {
+            return a.first[1] < b.first[1];
+        }
+        else {
+            return a.first[3] > b.first[3];
+        }
+        });
+
+    // Переписуємо матрицю у відсортованому порядку
+    int temp[numRows][numCols];
+    for (int i = 0; i < numRows; i++) {
+        for (int j = 0; j < numCols; j++) {
+            temp[i][j] = matrix[rowsWithIndices[i].second][j];
+        }
+    }
+
+    for (int i = 0; i < numRows; i++) {
+        for (int j = 0; j < numCols; j++) {
+            matrix[i][j] = temp[i][j];
+        }
+    }
+}
+
 // Головна функція
 int main() {
-    SetConsoleOutputCP(1251);
-    SetConsoleCP(1251);
     int matrix[numRows][numCols];
     const int lowerBound = -12;
     const int upperBound = 23;
@@ -54,6 +93,11 @@ int main() {
     replaceOddNonNegative(matrix);
 
     cout << "Модифікована матриця:" << endl;
+    displayMatrix(matrix);
+
+    sortMatrix(matrix);
+
+    cout << "Відсортована матриця:" << endl;
     displayMatrix(matrix);
 
     return 0;

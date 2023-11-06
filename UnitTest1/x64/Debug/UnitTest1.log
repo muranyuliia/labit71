@@ -1,0 +1,6 @@
+﻿  UnitTest1.cpp
+D:\labit71\UnitTest1\UnitTest1.cpp(27,9): error C2535: 'const Microsoft::VisualStudio::CppUnitTestFramework::MemberMethodInfo *UnitTest1::UnitTest1::__GetTestMethodInfo_TestMethod1(void)': member function already defined or declared
+D:\labit71\UnitTest1\UnitTest1.cpp(12,9): message : see declaration of 'UnitTest1::UnitTest1::__GetTestMethodInfo_TestMethod1'
+D:\labit71\UnitTest1\UnitTest1.cpp(27,9): error C2535: 'void UnitTest1::UnitTest1::TestMethod1(void)': member function already defined or declared
+D:\labit71\UnitTest1\UnitTest1.cpp(12,9): message : see declaration of 'UnitTest1::UnitTest1::TestMethod1'
+D:\labit71\UnitTest1\UnitTest1.cpp(29,18): error C2601: 'checkMatrixCriteria': local function definitions are illegal
